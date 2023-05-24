@@ -1,9 +1,14 @@
 tasks = []
 # Tämän avulla voidaan lisätä tehtäviä.
 def lisaa_tehtava():
-    tehtava = input("Syötä tehtävä: ")
-    tasks.append(tehtava)
-    print("Tehtävä lisätty!")
+    while True:
+        tehtava = input("Syötä tehtävä (lopeta lopettaaksesi): ")
+        if tehtava == "lopeta":
+            break
+        tasks.append(tehtava)
+        print("Tehtävä lisätty!")
+        print("Nykyiset tehtävät:")
+        nayta_tehtavat()
 
 # Tämän avulla voidaan näyttää tehtäväviä.
 def nayta_tehtavat():
@@ -24,19 +29,16 @@ def muokkaa_tehtavaa():
         print("Tehtävä muokattu!")
     else:
         print("Virheellinen indeksi!")
- 
-# Tämän avulla voidaan poistaa tehtävät.       
+
+# Tämän avulla voidaan poistaa tehtävät. 
 def poista_tehtava():
     nayta_tehtavat()
-    try:
-        indeksi = int(input("Syötä poistettavan tehtävän indeksi: ")) - 1
-        if indeksi >= 0 and indeksi < len(tasks):
-            poistettu_tehtava = tasks.pop(indeksi)
-            print(f"Tehtävä '{poistettu_tehtava}' poistettu!")
-        else:
-            print("Virheellinen indeksi!")
-    except ValueError:
-        print("Virheellinen syöte! Syötä kokonaisluku.")
+    indeksi = int(input("Syötä poistettavan tehtävän indeksi: ")) - 1
+    if indeksi >= 0 and indeksi < len(tasks):
+        poistettu_tehtava = tasks.pop(indeksi)
+        print(f"Tehtävä '{poistettu_tehtava}' poistettu!")
+    else:
+        print("Virheellinen indeksi!")
 
 # Tämän suorittaa to-do listan. 
 def suorita_to_do_lista():
