@@ -51,7 +51,6 @@ def poista_tehtava():
 
 # Tämän suorittaa to-do listan. 
 def suorita_to_do_lista():
-    suoritetut_tehtavat = set()
     while True:
         valinta = input("Valitse toiminto (lisää/näytä/muokkaa/poista/lopeta): ")
         if valinta == "lisää":
