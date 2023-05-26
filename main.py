@@ -1,4 +1,5 @@
 tasks = []
+suoritetut_tehtavat = set()
 # Tämän avulla voidaan lisätä tehtäviä.
 def lisaa_tehtava():
     while True:
@@ -8,16 +9,24 @@ def lisaa_tehtava():
         tasks.append(tehtava)
         print("Tehtävä lisätty!")
         print("Nykyiset tehtävät:")
-        nayta_tehtavat()
+        nayta_tehtavat(suoritetut_tehtavat)
+        suoritetaanko = input("Merkitäänkö tehtävä suoritetuksi (kyllä/ei)? ")
+        if suoritetaanko == "kyllä":
+            suoritetut_tehtavat.add(len(tasks))
+            print("Tehtävä merkitty suoritetuksi!")
 
 # Tämän avulla voidaan näyttää tehtäväviä.
-def nayta_tehtavat():
+def nayta_tehtavat(suoritetut_tehtavat):
     if not tasks:
         print("Ei tehtäviä.")
     else:
         print("Tässä on lista tehtävistäsi:")
         for i, tehtava in enumerate(tasks):
-            print(f"{i+1}. {tehtava}")
+            if i+1 in suoritetut_tehtavat:
+                yliviivattu_tehtava = "\u0336" + tehtava
+                print(f"{i+1}. {yliviivattu_tehtava}")
+            else:
+                print(f"{i+1}. {tehtava}")
 
 # Tämän avulla voidaan muokata tehtäviä.
 def muokkaa_tehtavaa():
@@ -42,6 +51,7 @@ def poista_tehtava():
 
 # Tämän suorittaa to-do listan. 
 def suorita_to_do_lista():
+    suoritetut_tehtavat = set()
     while True:
         valinta = input("Valitse toiminto (lisää/näytä/muokkaa/poista/lopeta): ")
         if valinta == "lisää":
